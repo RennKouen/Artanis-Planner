@@ -1,16 +1,14 @@
 # Mundo de Artanis — Planner
 
-Site planner para o jogador do RPG "Mundo de Artanis" — permite criar e gerenciar personagens.
-
-Projeto de TCC — disciplina Projeto de Software.
+Site planner para o jogador do RPG "Mundo de Artanis" — permite criar e gerenciar personagens, consultar o bestiario, e futuramente simular batalhas e acompanhar progressao.
 
 ---
 
-## Stack
+## Pre-requisitos
 
-- **Backend:** Node.js + Express + MySQL (mysql2) + JWT + bcrypt
-- **Frontend:** React + Vite + React Router + Axios
-- **Banco de dados:** MySQL
+- [Node.js](https://nodejs.org) (versao LTS)
+- [MySQL](https://dev.mysql.com/downloads/installer/) (Server + Workbench)
+- [Git](https://git-scm.com/downloads)
 
 ---
 
@@ -18,21 +16,48 @@ Projeto de TCC — disciplina Projeto de Software.
 
 ### 1. Banco de dados
 
-Instale o MySQL e execute o script:
+As instrucoes abaixo funcionam tanto no **CMD** quanto no **PowerShell** do Windows,
+usando o cliente de linha de comando do MySQL (evita problemas de encoding que o
+MySQL Workbench as vezes tem com acentos).
 
-```bash
-mysql -u root -p < database/schema.sql
+Abra um terminal na pasta `bin` da sua instalacao do MySQL, por exemplo:
+
+```
+cd "C:\Program Files\MySQL\MySQL Server 8.0\bin"
 ```
 
-Isso cria o banco `artanis_planner` com as tabelas `players` e `characters`.
+**No CMD:**
+```
+mysql -u root -p --default-character-set=utf8mb4 < "CAMINHO\artanis-planner\database\schema.sql"
+mysql -u root -p artanis_planner --default-character-set=utf8mb4 < "CAMINHO\artanis-planner\database\seed_monsters.sql"
+```
+
+**No PowerShell** (o `<` nao funciona aqui, use `Get-Content`):
+```
+Get-Content "CAMINHO\artanis-planner\database\schema.sql" | .\mysql.exe -u root -p --default-character-set=utf8mb4
+Get-Content "CAMINHO\artanis-planner\database\seed_monsters.sql" | .\mysql.exe -u root -p artanis_planner --default-character-set=utf8mb4
+```
+
+Troque `CAMINHO` pelo caminho real onde voce colocou a pasta `artanis-planner`.
+
+Isso cria o banco `artanis_planner` com as tabelas `players`, `characters` e `monsters`
+(ja populada com os 56 monstros do bestiario).
+
+Para conferir que funcionou:
+```
+mysql -u root -p -e "USE artanis_planner; SHOW TABLES; SELECT COUNT(*) FROM monsters;"
+```
 
 ### 2. Backend
 
-```bash
+```
 cd backend
 npm install
-cp .env.example .env
-# Edite o .env com sua senha do MySQL
+copy .env.example .env
+```
+Abra o `.env` num editor de texto e preencha `DB_PASSWORD` com a senha do seu MySQL.
+
+```
 npm run dev
 ```
 
@@ -42,7 +67,7 @@ O backend sobe em `http://localhost:3001`.
 
 Em outro terminal:
 
-```bash
+```
 cd frontend
 npm install
 npm run dev
@@ -57,33 +82,50 @@ O frontend sobe em `http://localhost:5173`.
 ```
 artanis-planner/
 ├── backend/
-│   ├── config/db.js          # conexão MySQL
-│   ├── middleware/auth.js    # verificação de JWT
+│   ├── config/db.js          # conexao MySQL
+│   ├── middleware/auth.js    # verificacao de JWT
 │   ├── routes/auth.js        # registro/login
 │   ├── routes/characters.js  # CRUD de personagens
+│   ├── routes/monsters.js    # consulta do bestiario
 │   └── server.js
 ├── frontend/
+│   ├── public/assets/        # sprites de classes e monstros
 │   └── src/
-│       ├── pages/            # Login, Register, Characters
-│       ├── components/       # ProtectedRoute, CreateCharacterModal
-│       ├── services/api.js   # instância axios
-│       └── data/classes.js   # referência das 6 classes
+│       ├── pages/            # Login, Register, Characters, Bestiary
+│       ├── components/       # Sidebar, TopBar, AppLayout, modais, paineis
+│       ├── context/          # CharactersContext (estado compartilhado)
+│       ├── services/         # api.js, monsters.js
+│       └── data/             # classes.js, elements.js
 └── database/
-    └── schema.sql
+    ├── schema.sql            # cria as tabelas
+    └── seed_monsters.sql     # popula o bestiario
 ```
 
 ---
 
-## Funcionalidades — AC1
+## Funcionalidades
 
+### Concluido
 - Cadastro e login de conta (JWT)
-- Criação de personagem: nome + classe (Guerreiro, Arqueiro, Mago, Lutador, Ladino, Feiticeiro)
-- Status iniciais fixos no nível 1 (STR/AGI/INT/DEX/VIT/LUK = 3, HP/MP = 100)
-- Uma conta pode ter múltiplos personagens
-- Listagem e exclusão de personagens
+- Criacao de personagem: nome + classe (Guerreiro, Arqueiro, Mago, Lutador, Ladino, Feiticeiro)
+- Status iniciais fixos no nivel 1 (STR/AGI/INT/DEX/VIT/LUK = 3, HP/MP = 100)
+- Uma conta pode ter multiplos personagens
+- Listagem e exclusao de personagens
+- Bestiario com os 56 monstros do jogo: busca por nome, painel de detalhe fixo
+  (atributos, stats de combate derivados, drops, areas, cor por elemento)
 
-## Roadmap (próximas entregas)
+### Em andamento
+- Ficha detalhada do personagem (atributos derivados, edicao)
+- Planejamento da insercao do banco de itens (ItemDatabase)
 
-- **AC2:** Ficha detalhada do personagem + evolução de classe
-- **AC3:** Simulação de batalha (importando MonsterDatabase/ItemDatabase)
-- **Final:** Habilidades + sistema de EXP/level up
+### Planejado
+- Simulador de batalha (personagem vs. monstro do bestiario)
+- Habilidades por classe
+
+---
+
+## Gerenciamento do projeto
+
+O backlog e o progresso de cada funcionalidade sao acompanhados no board do
+repositorio (aba **Projects** no GitHub).
+
