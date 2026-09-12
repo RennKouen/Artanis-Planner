@@ -49,7 +49,7 @@ export default function CreateCharacterModal({ onClose, onCreated }) {
                 style={{ borderColor: classe === c.id ? c.cor : 'transparent' }}
                 onClick={() => setClasse(c.id)}
               >
-                <span className="classe-icone">{c.icone}</span>
+                <img src={c.sprite} alt={c.nome} className="classe-sprite" />
                 <span>{c.nome}</span>
               </button>
             ))}

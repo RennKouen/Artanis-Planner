@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const characterRoutes = require('./routes/characters');
+const monsterRoutes = require('./routes/monsters');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/characters', characterRoutes);
+app.use('/api/monsters', monsterRoutes);
 
 // Rota de teste / health check
 app.get('/api/health', (req, res) => {

@@ -1,68 +1,27 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import { useCharacters } from '../context/CharactersContext.jsx';
 import { getClasseInfo } from '../data/classes';
-import CreateCharacterModal from '../components/CreateCharacterModal.jsx';
+import api from '../services/api';
 
 export default function Characters() {
-  const [personagens, setPersonagens] = useState([]);
-  const [carregando, setCarregando] = useState(true);
-  const [modalAberto, setModalAberto] = useState(false);
-  const navigate = useNavigate();
-
-  const player = JSON.parse(localStorage.getItem('artanis_player') || '{}');
-
-  useEffect(() => {
-    carregarPersonagens();
-  }, []);
-
-  async function carregarPersonagens() {
-    setCarregando(true);
-    try {
-      const res = await api.get('/characters');
-      setPersonagens(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setCarregando(false);
-    }
-  }
+  const { personagens, carregando, removerPersonagem } = useCharacters();
 
   async function excluirPersonagem(id) {
     if (!confirm('Tem certeza que deseja excluir este personagem?')) return;
     try {
       await api.delete(`/characters/${id}`);
-      setPersonagens((prev) => prev.filter((p) => p.id !== id));
+      removerPersonagem(id);
     } catch (err) {
       console.error(err);
     }
   }
 
-  function handleLogout() {
-    localStorage.removeItem('artanis_token');
-    localStorage.removeItem('artanis_player');
-    navigate('/login');
-  }
-
-  function handleCreated(novoPersonagem) {
-    setPersonagens((prev) => [novoPersonagem, ...prev]);
-  }
-
   return (
-    <div className="page-container">
-      <header className="page-header">
-        <div>
-          <h1>Mundo de Artanis</h1>
-          <p className="subtitle">Olá, {player.username}</p>
-        </div>
-        <button className="btn-secundario" onClick={handleLogout}>
-          Sair
-        </button>
-      </header>
-
+    <div>
       <div className="section-header">
-        <h2>Meus Personagens</h2>
-        <button onClick={() => setModalAberto(true)}>+ Criar Personagem</button>
+        <div>
+          <h1 className="page-title">Personagens</h1>
+          <p className="page-subtitle">Gerencie os personagens desta conta</p>
+        </div>
       </div>
 
       {carregando ? (
@@ -70,7 +29,7 @@ export default function Characters() {
       ) : personagens.length === 0 ? (
         <div className="empty-state">
           <p>Você ainda não criou nenhum personagem.</p>
-          <button onClick={() => setModalAberto(true)}>Criar meu primeiro personagem</button>
+          <p className="empty-state-hint">Use o botão "+ Personagem" no topo da tela para criar o primeiro.</p>
         </div>
       ) : (
         <div className="characters-grid">
@@ -79,8 +38,10 @@ export default function Characters() {
             return (
               <div className="character-card" key={p.id} style={{ borderColor: info.cor }}>
                 <div className="character-card-header" style={{ background: info.cor }}>
-                  <span className="classe-icone">{info.icone}</span>
                   <span>{info.nome}</span>
+                </div>
+                <div className="character-card-sprite-wrap">
+                  <img src={info.sprite} alt={info.nome} className="character-card-sprite" />
                 </div>
                 <div className="character-card-body">
                   <h3>{p.name}</h3>
@@ -105,13 +66,6 @@ export default function Characters() {
             );
           })}
         </div>
-      )}
-
-      {modalAberto && (
-        <CreateCharacterModal
-          onClose={() => setModalAberto(false)}
-          onCreated={handleCreated}
-        />
       )}
     </div>
   );
