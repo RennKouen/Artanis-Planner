@@ -2,7 +2,7 @@
 
 Site planner para o jogador do RPG "Mundo de Artanis" — permite criar e gerenciar personagens.
 
-Projeto de TCC — disciplina Projeto de Software.
+Disciplina Projeto de Software.
 
 ---
 
