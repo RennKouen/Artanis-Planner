@@ -1,0 +1,110 @@
+/* Ficha do personagem */
+.ficha { max-width: 980px; }
+.ficha-voltar { display: inline-block; margin-bottom: 14px; color: var(--text-muted); text-decoration: none; font-size: 13px; }
+.ficha-voltar:hover { color: var(--gold); }
+
+.ficha-topo { display: flex; gap: 20px; align-items: center; background: var(--bg-panel); border: 1px solid var(--border); border-left-width: 4px; border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+.ficha-sprite { width: 96px; height: 96px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ficha-sprite img { max-width: 88px; max-height: 88px; image-rendering: pixelated; }
+.ficha-identidade { flex: 1; min-width: 0; }
+.ficha-nome-linha { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ficha-nome { margin: 0; }
+.ficha-btn-pequeno { padding: 5px 12px; font-size: 12px; }
+.ficha-nome-form { display: flex; gap: 8px; align-items: center; }
+.ficha-nome-form input { margin: 0; max-width: 260px; }
+.ficha-classe { font-weight: 600; margin: 4px 0 12px; }
+.ficha-exp-rotulo { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+.ficha-barra { height: 8px; background: #1c2338; border-radius: 4px; overflow: hidden; }
+.ficha-barra-fill { height: 100%; border-radius: 4px; }
+.ficha-zeny { margin-top: 10px; font-size: 13px; color: var(--text-muted); }
+
+.ficha-aviso { background: #1c2338; border: 1px solid var(--gold-dim); color: var(--gold); padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+
+.ficha-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ficha-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+.ficha-card h2 { color: var(--gold); font-size: 16px; margin-bottom: 12px; }
+
+.ficha-pontos { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+.ficha-pontos strong { color: var(--gold); font-size: 16px; }
+.ficha-attrs { display: flex; flex-direction: column; gap: 8px; }
+.ficha-attr { display: flex; align-items: center; gap: 12px; background: #0f1426; border-radius: 8px; padding: 8px 12px; }
+.ficha-attr-nome { width: 44px; font-weight: 700; color: var(--text-muted); }
+.ficha-attr-valor { flex: 1; font-size: 18px; font-weight: 600; }
+.ficha-attr-valor em { color: var(--gold); font-size: 13px; font-style: normal; }
+.ficha-attr-botoes { display: flex; gap: 6px; }
+.ficha-attr-botoes button { padding: 2px 0; width: 30px; height: 28px; font-size: 16px; }
+.ficha-confirmar { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+.ficha-vitais { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.ficha-derivados { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ficha-derivado { display: flex; justify-content: space-between; background: #0f1426; border-radius: 8px; padding: 8px 12px; font-size: 13px; }
+.ficha-derivado span { color: var(--text-muted); }
+.ficha-nota { font-size: 12px; color: var(--text-muted); margin-top: 10px; }
+
+
+.ficha-rodape { display: flex; justify-content: flex-end; }
+.ficha-excluir { width: auto; margin-top: 0; }
+
+.character-card-actions { display: flex; gap: 8px; margin-top: 10px; }
+.character-card-actions button { flex: 1; margin-top: 0; }
+
+@media (max-width: 800px) {
+  .ficha-colunas { grid-template-columns: 1fr; }
+  .ficha-topo { flex-direction: column; text-align: center; }
+}
+
+/* Nivel */
+.ficha-nivel-form { display: flex; gap: 10px; align-items: center; margin: 4px 0 8px; flex-wrap: wrap; }
+.ficha-nivel-form label { font-size: 13px; color: var(--text-muted); }
+.ficha-nivel-form input { margin: 0; width: 90px; }
+
+/* Previa dos derivados */
+.ficha-delta { font-style: normal; font-size: 12px; font-weight: 700; margin-left: 4px; }
+.ficha-delta.up { color: #5fbf5f; }
+.ficha-delta.down { color: #e0503a; }
+
+/* Tooltip dos atributos */
+.ficha-attr { position: relative; }
+.ficha-tooltip {
+  display: none; position: absolute; left: 60px; top: calc(100% + 4px); z-index: 20;
+  background: #0b0e1a; border: 1px solid var(--gold-dim); border-radius: 8px;
+  padding: 10px 14px; min-width: 240px; box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  font-size: 13px; pointer-events: none;
+}
+.ficha-attr:hover .ficha-tooltip { display: block; }
+.ficha-tooltip strong { color: var(--gold); display: block; margin-bottom: 2px; }
+.ficha-tooltip-sub { color: var(--text-muted); font-size: 12px; }
+.ficha-tooltip ul { margin: 6px 0 0 16px; }
+.ficha-tooltip li { margin-bottom: 2px; }
+
+/* Habilidades */
+.ficha-habilidades { margin-bottom: 16px; }
+.hab-cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.hab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 8px; }
+.hab-card { background: #0f1426; border: 1px solid var(--border); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.hab-card.aprendida { background: #131a30; }
+.hab-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.hab-topo h3 { font-size: 15px; margin: 0; }
+.hab-tipo { font-size: 11px; color: var(--text-muted); text-transform: capitalize; margin-top: 2px; }
+.hab-controle { display: flex; align-items: center; gap: 6px; }
+.hab-controle button { padding: 2px 0; width: 28px; height: 26px; font-size: 15px; }
+.hab-nivel { font-size: 12px; font-weight: 700; min-width: 34px; text-align: center; }
+.hab-pips { display: flex; gap: 4px; }
+.hab-pip { width: 100%; height: 5px; border-radius: 3px; background: #1c2338; }
+.hab-desc { font-size: 12px; color: var(--text-muted); white-space: pre-line; }
+.hab-detalhes { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; border-top: 1px solid var(--border); padding-top: 8px; }
+.hab-detalhes-titulo { width: 100%; color: var(--gold); font-weight: 600; }
+.hab-detalhes strong { color: var(--text-primary); }
+
+.hab-novato-info { font-size: 13px; color: var(--text-muted); background: #0f1426; border-radius: 8px; padding: 8px 12px; margin: 6px 0 4px; }
+.hab-novato-info strong { color: var(--gold); }
+.hab-grupo-titulo { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 18px 0 4px; font-family: 'Inter', sans-serif; }
+.hab-card.bloqueada { opacity: 0.6; }
+.hab-requisitos { list-style: none; font-size: 12px; display: flex; flex-direction: column; gap: 2px; }
+.hab-requisitos li.ok { color: #5fbf5f; }
+.hab-requisitos li.falta { color: #e0503a; }
+.hab-requisitos li span { display: inline-block; width: 16px; font-weight: 700; }
+.hab-bloco { display: flex; flex-wrap: wrap; gap: 4px 12px; width: 100%; }
+.hab-bloco + .hab-bloco, .hab-detalhes > .hab-bloco:nth-child(2) { border-top: 1px dashed var(--border); padding-top: 6px; margin-top: 2px; }
+.hab-detalhes-titulo.muted { color: var(--text-muted); font-weight: 500; }
+.hab-sem-valores { color: var(--text-muted); }

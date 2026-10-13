@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Characters from './pages/Characters.jsx';
+import CharacterSheet from './pages/CharacterSheet.jsx';
 import Bestiary from './pages/Bestiary.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import AppLayout from './components/AppLayout.jsx';
@@ -18,6 +19,17 @@ export default function App() {
           <ProtectedRoute>
             <AppLayout>
               <Characters />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/personagens/:id"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <CharacterSheet />
             </AppLayout>
           </ProtectedRoute>
         }

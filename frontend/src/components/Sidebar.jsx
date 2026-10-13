@@ -7,7 +7,6 @@ const NAV_ITEMS = [
 
 const NAV_FUTURO = [
   { label: 'Itens',              icon: 'bag' },
-  { label: 'Habilidades',        icon: 'spark' },
   { label: 'Simulação de Batalha', icon: 'sword' },
 ];
 

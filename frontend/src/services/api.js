@@ -1,5 +1,6 @@
 // src/services/api.js
 // Instância central do axios — injeta o token JWT automaticamente
+// e desloga o usuário quando o token é recusado pelo servidor.
 
 import axios from 'axios';
 
@@ -14,5 +15,22 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+    const url = error.config?.url || '';
+    // 401 fora das rotas de login/registro = sessão inválida ou expirada
+    if (status === 401 && !url.includes('/auth/')) {
+      localStorage.removeItem('artanis_token');
+      localStorage.removeItem('artanis_player');
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

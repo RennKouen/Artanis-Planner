@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { useCharacters } from '../context/CharactersContext.jsx';
 import { getClasseInfo } from '../data/classes';
 import api from '../services/api';
 
 export default function Characters() {
   const { personagens, carregando, removerPersonagem } = useCharacters();
+  const navigate = useNavigate();
 
   async function excluirPersonagem(id) {
     if (!confirm('Tem certeza que deseja excluir este personagem?')) return;
@@ -58,9 +60,12 @@ export default function Characters() {
                     <span>❤️ {p.hp_base}</span>
                     <span>💧 {p.mp_base}</span>
                   </div>
-                  <button className="btn-excluir" onClick={() => excluirPersonagem(p.id)}>
-                    Excluir
-                  </button>
+                  <div className="character-card-actions">
+                    <button onClick={() => navigate(`/personagens/${p.id}`)}>Ver ficha</button>
+                    <button className="btn-excluir" onClick={() => excluirPersonagem(p.id)}>
+                      Excluir
+                    </button>
+                  </div>
                 </div>
               </div>
             );
