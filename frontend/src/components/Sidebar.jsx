@@ -3,11 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const NAV_ITEMS = [
   { to: '/personagens', label: 'Personagens', icon: 'user' },
   { to: '/bestiario',   label: 'Bestiário',   icon: 'skull' },
-];
-
-const NAV_FUTURO = [
-  { label: 'Itens',              icon: 'bag' },
-  { label: 'Simulação de Batalha', icon: 'sword' },
+  { to: '/itens',       label: 'Itens',       icon: 'bag' },
+  { to: '/simulador',   label: 'Simulação de Batalha', icon: 'sword' },
 ];
 
 const ICONS = {
@@ -48,14 +45,6 @@ export default function Sidebar() {
             <svg viewBox="0 0 24 24" className="sidebar-icon">{ICONS[item.icon]}</svg>
             <span>{item.label}</span>
           </NavLink>
-        ))}
-
-        <p className="sidebar-section-label">Em breve</p>
-        {NAV_FUTURO.map((item) => (
-          <div key={item.label} className="sidebar-link disabled">
-            <svg viewBox="0 0 24 24" className="sidebar-icon">{ICONS[item.icon]}</svg>
-            <span>{item.label}</span>
-          </div>
         ))}
       </nav>
 

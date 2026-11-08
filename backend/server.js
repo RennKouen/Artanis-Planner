@@ -8,6 +8,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const characterRoutes = require('./routes/characters');
 const monsterRoutes = require('./routes/monsters');
+const itemRoutes = require('./routes/items');
+const simulationRoutes = require('./routes/simulations');
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/characters', characterRoutes);
 app.use('/api/monsters', monsterRoutes);
+app.use('/api/items', itemRoutes);
+app.use('/api/simulations', simulationRoutes);
 
 // Rota de teste / health check
 app.get('/api/health', (req, res) => {

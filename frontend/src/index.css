@@ -122,14 +122,12 @@ label {
 /* ── App shell (sidebar + topbar + content) ─────────────── */
 .app-shell {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .sidebar {
   width: 240px;
   min-width: 240px;
-  height: 100vh;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
   display: flex;
@@ -177,8 +175,6 @@ label {
   flex-direction: column;
   gap: 2px;
   flex: 1;
-  overflow-y: auto;
-  min-height: 0;
 }
 
 .sidebar-link {
@@ -250,8 +246,6 @@ label {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  height: 100vh;
-  overflow: hidden;
 }
 
 .topbar {
@@ -261,7 +255,6 @@ label {
   padding: 16px 30px;
   background: var(--bg-panel);
   border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
 }
 
 .topbar-chips {
@@ -288,9 +281,9 @@ label {
 }
 
 .topbar-chip-sprite {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
   object-position: top center;
   border-radius: 6px;
   background: #0b0e1a;
@@ -313,7 +306,6 @@ label {
 
 .app-content {
   flex: 1;
-  overflow-y: auto;
   padding: 30px 36px;
   max-width: 1200px;
   width: 100%;
@@ -374,9 +366,10 @@ label {
 }
 
 .character-card-sprite {
+  width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .character-card-body { padding: 16px; }
@@ -481,72 +474,32 @@ label {
 }
 
 /* ── Bestiary ──────────────────────────────────────────── */
-.bestiary-page {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.bestiary-layout {
-  display: flex;
-  gap: 22px;
-  flex: 1;
-  min-height: 0;
-}
-
-.bestiary-list-col {
-  flex: 1;
-  min-width: 0;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-.bestiary-detail-col {
-  width: 360px;
-  flex-shrink: 0;
-}
-
 .monster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
 }
 
 .monster-card {
   background: var(--bg-panel);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 14px 10px 10px;
+  padding: 14px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   text-align: center;
   transition: border-color 0.15s, transform 0.1s;
-  position: relative;
-  overflow: hidden;
-}
-.monster-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--elem-color, var(--border));
 }
 .monster-card:hover {
   border-color: var(--gold-dim);
   transform: translateY(-2px);
 }
-.monster-card.selected {
-  border-color: var(--gold);
-  background: #171e34;
-}
 
 .monster-card-sprite {
   width: 100%;
-  height: 80px;
+  height: 90px;
   object-fit: contain;
 }
 
@@ -559,27 +512,6 @@ label {
 .monster-card-level {
   font-size: 11px;
   color: #aab2c8;
-}
-
-.detail-panel {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
-  height: 100%;
-  overflow-y: auto;
-  position: sticky;
-  top: 0;
-}
-
-.detail-panel-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 13px;
-  text-align: center;
-  padding: 40px 20px;
 }
 
 .monster-modal { width: 420px; }
@@ -604,11 +536,11 @@ label {
 .monster-tag {
   display: inline-block;
   background: #171e34;
+  color: var(--gold);
   font-size: 11px;
   padding: 3px 8px;
   border-radius: 6px;
   text-transform: capitalize;
-  border: 1px solid transparent;
 }
 
 .monster-stats { margin-bottom: 16px; }

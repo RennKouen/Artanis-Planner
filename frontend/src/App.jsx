@@ -4,6 +4,8 @@ import Register from './pages/Register.jsx';
 import Characters from './pages/Characters.jsx';
 import CharacterSheet from './pages/CharacterSheet.jsx';
 import Bestiary from './pages/Bestiary.jsx';
+import Items from './pages/Items.jsx';
+import BattleSimulator from './pages/BattleSimulator.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import AppLayout from './components/AppLayout.jsx';
 
@@ -41,6 +43,28 @@ export default function App() {
           <ProtectedRoute>
             <AppLayout>
               <Bestiary />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/itens"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <Items />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/simulador"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <BattleSimulator />
             </AppLayout>
           </ProtectedRoute>
         }

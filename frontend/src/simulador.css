@@ -1,0 +1,62 @@
+/* Itens */
+.itens-filtros { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.itens-filtro { background: #131a30; color: var(--text-muted); border: 1px solid var(--border); padding: 6px 14px; font-size: 13px; }
+.itens-filtro.ativo { background: var(--gold); color: #1a1a1a; border-color: var(--gold); }
+.itens-lista { display: flex; flex-direction: column; gap: 8px; }
+.item-linha { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.item-cabecalho { display: grid; grid-template-columns: 1fr 160px 70px 80px; gap: 12px; width: 100%; background: transparent; color: var(--text-primary); text-align: left; padding: 0; margin: 0; border-radius: 0; align-items: center; }
+.item-cabecalho:hover { background: transparent; }
+.item-nome { font-weight: 600; }
+.item-sub, .item-tier, .item-preco { color: var(--text-muted); font-size: 12px; text-transform: capitalize; }
+.item-preco { text-align: right; }
+.item-attrs { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; font-size: 12px; color: var(--text-muted); }
+.item-attrs strong { color: var(--text-primary); }
+.item-detalhe { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 13px; color: var(--text-muted); }
+
+/* Simulador */
+.sim { max-width: 1000px; }
+.sim-form { margin-bottom: 16px; }
+.sim-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.sim-campos label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); }
+.sim-campos select { margin: 0; width: 100%; }
+.sim-acoes { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+.sim-nota { margin-top: 16px; }
+
+.sim-resultado { display: flex; flex-direction: column; gap: 16px; }
+.sim-banner { border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--border); }
+.sim-banner strong { font-size: 20px; font-family: 'Cinzel', serif; }
+.sim-banner span { font-size: 13px; color: var(--text-muted); }
+.sim-banner.vitoria { background: #10261a; border-color: #2f7a46; }
+.sim-banner.vitoria strong { color: #5fbf5f; }
+.sim-banner.derrota { background: #2a1214; border-color: #8a2f2f; }
+.sim-banner.derrota strong { color: #e0503a; }
+.sim-banner.empate { background: #1c2338; }
+
+.sim-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.sim-stats-grid div { background: #0f1426; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.sim-stats-grid span { font-size: 12px; color: var(--text-muted); }
+.sim-stats-grid strong { font-size: 18px; color: var(--gold); }
+
+.sim-lados { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sim-lista { list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.sim-lista li { display: flex; justify-content: space-between; background: #0f1426; border-radius: 6px; padding: 6px 10px; color: var(--text-muted); text-transform: none; }
+.sim-lista strong { color: var(--text-primary); }
+
+.sim-log { max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; font-size: 13px; }
+.sim-log-linha { display: grid; grid-template-columns: 38px 1fr auto; gap: 10px; padding: 5px 8px; border-radius: 6px; background: #0f1426; align-items: baseline; }
+.sim-log-turno { color: var(--text-muted); font-size: 11px; }
+.sim-log-hp { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
+.sim-log-linha.dano .sim-log-texto, .sim-log-linha.habilidade .sim-log-texto { color: #f0f0f5; }
+.sim-log-linha.critico .sim-log-texto { color: var(--gold); font-weight: 600; }
+.sim-log-linha.dano-monstro .sim-log-texto { color: #e08a7a; }
+.sim-log-linha.critico-monstro .sim-log-texto { color: #e0503a; font-weight: 600; }
+.sim-log-linha.erro .sim-log-texto, .sim-log-linha.esquiva .sim-log-texto { color: var(--text-muted); }
+.sim-log-linha.status .sim-log-texto { color: #9a5fd1; }
+.sim-log-linha.sistema .sim-log-texto { color: var(--gold); }
+
+@media (max-width: 800px) {
+  .sim-lados { grid-template-columns: 1fr; }
+  .item-cabecalho { grid-template-columns: 1fr 70px; }
+  .item-sub, .item-tier { display: none; }
+}
+.sim-subtitulo{margin:18px 0 8px;font-size:1rem;opacity:.85}

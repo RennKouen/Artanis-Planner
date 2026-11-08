@@ -19,7 +19,7 @@ export default function TopBar() {
             const info = getClasseInfo(p.class);
             return (
               <div className="topbar-chip" key={p.id} style={{ borderColor: info.cor }}>
-                <img src={info.sprite} alt={info.nome} className="topbar-chip-sprite" />
+                <img src={info.icone} alt={info.nome} className="topbar-chip-sprite" />
                 <div className="topbar-chip-text">
                   <span className="topbar-chip-name">{p.name}</span>
                   <span className="topbar-chip-meta">Nível {p.level} · {info.nome}</span>
